@@ -1,6 +1,6 @@
 # Locale
 
-Utilities for working with LC environment variables
+Utilities for working with LC environment variables.
 
 ## Install
 
@@ -28,7 +28,7 @@ You could also use this functionality to convert between language identifiers or
 
 ### find(search, [filter])
 
-Find the value of an LC environment variable and return a sanitized represention of the locale. If no variable value is found in the search array then this method returns the first available LC variable. If the no LC variables are available in the environment this method returns the default `language`.
+Find the value of an LC environment variable and return a sanitized represention of the locale. If no variable value is found in the search array then this method returns the first available LC variable. If no LC variables are available in the environment this method returns the default `language`.
 
 * `search`: Array of LC environment variables to prefer.
 * `filter`: A filter function.
