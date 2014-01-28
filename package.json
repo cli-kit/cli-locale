@@ -1,7 +1,7 @@
 {
   "name": "cli-locale",
   "version": "0.0.1",
-  "description": "Unified error handling for command line interfaces",
+  "description": "Utilities for working with LC environment variables",
   "author": "muji <noop@xpm.io>",
   "repository": {
     "type": "git",
@@ -17,7 +17,8 @@
   "keywords": [
     "cli",
     "environment",
-    "lc"
+    "lc",
+    "locale"
   ],
   "scripts": {}
 }
