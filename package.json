@@ -1,6 +1,6 @@
 {
   "name": "cli-locale",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Utilities for working with LC environment variables",
   "author": "muji <noop@xpm.io>",
   "repository": {

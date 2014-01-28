@@ -32,7 +32,7 @@ function sanitize(lang, filter) {
  *  @return A language identifier.
  */
 function find(search, filter) {
-  var lang = language, search = config.lc || [], i, k, v, re = /^LC_/;
+  var lang = language, search = search || [], i, k, v, re = /^LC_/;
   for(i = 0;i < search.length;i++) {
     lang = sanitize(process.env[process.env[search[i]]] || '', filter);
     if(lang) return lang;
