@@ -5,12 +5,18 @@ var language = 'en';
  *  encoding portion, such that en_GB.UTF-8 becomes en_gb.
  *
  *  @param lang A language identifier extracted from an LC variable.
+ *  @param filter A filter function.
  *
  *  @return A sanitized language identifier.
  */
-function sanitize(lang) {
+function sanitize(lang, filter) {
   if(!lang) return lang;
-  return lang.replace(/\..*$/, '').toLowerCase();
+  lang = '' + lang;
+  lang = lang.replace(/\..*$/, '').toLowerCase();
+  if(typeof filter == 'function') {
+    lang = filter(lang);
+  }
+  return lang;
 }
 
 /**
@@ -21,20 +27,21 @@ function sanitize(lang) {
  *  method returns the first available LC variable.
  *
  *  @param search An array of LC variables to prefer.
+ *  @param filter A filter function.
  *
  *  @return A language identifier.
  */
-function find(search) {
+function find(search, filter) {
   var lang = language, search = config.lc || [], i, k, v, re = /^LC_/;
   for(i = 0;i < search.length;i++) {
-    lang = sanitize(process.env[process.env[search[i]]] || '');
+    lang = sanitize(process.env[process.env[search[i]]] || '', filter);
     if(lang) return lang;
   }
   // nothing found in search array, find first available
   for(k in process.env) {
     v = process.env[k];
     if(re.test(k) && v) {
-      lang = sanitize(v);
+      lang = sanitize(v, filter);
     }
   }
   return lang;
