@@ -47,7 +47,7 @@ function find(search, filter) {
 }
 
 module.exports = function(lang) {
-  language = lang;
+  module.exports.language = language = lang;
   return module.exports;
 }
 
