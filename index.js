@@ -43,7 +43,7 @@ function find(search, filter) {
       lang = sanitize(v, filter);
     }
   }
-  return lang;
+  return lang || language;
 }
 
 module.exports = function(lang) {
