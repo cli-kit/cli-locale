@@ -3,10 +3,12 @@ var lc = require('../..'), find = lc.find;
 var en = 'en';
 var enus = 'en_US';
 var engb = 'en_GB.UTF-8';
+var search = ['LC_ALL', 'LC_MESSAGES'];
 
 // stash any original LC variables
 var vars = {};
 function stash() {
+  vars.LANG = process.env.LANG;
   for(var z in process.env) {
     if(/^LC_/.test(z)) {
       vars[z] = process.env[z];
@@ -14,6 +16,7 @@ function stash() {
   }
 }
 function clear() {
+  process.env.LANG = '';
   for(var z in process.env) {
     if(/^LC_/.test(z)) {
       process.env[z] = '';
@@ -26,16 +29,33 @@ function restore() {
   }
 }
 
-
 describe('cli-locale:', function() {
   stash();
+  clear();
+  lc(en);
   it('should return default language with no LC variables', function(done) {
-    clear();
-    lc(en);
-    var lang = find(['LC_ALL', 'LC_MESSAGES']);
+    var lang = find(search);
     expect(lang).to.be.a('string').that.equals(lc.language);
-    //console.dir(lang);
-    //console.dir(lc.language);
+    done();
+  });
+  it('should return language from search array', function(done) {
+    process.env.LC_MESSAGES = enus;
+    var lang = find(search);
+    expect(lang).to.be.a('string').that.equals('en_us');
+    done();
+  });
+  it('should return language from first available', function(done) {
+    process.env.LC_MESSAGES = '';
+    process.env.LC_TIME= engb;
+    var lang = find(search);
+    expect(lang).to.be.a('string').that.equals('en_gb');
+    done();
+  });
+  it('should return language from LANG', function(done) {
+    clear();
+    process.env.LANG = enus;
+    var lang = find(search);
+    expect(lang).to.be.a('string').that.equals('en_us');
     done();
   });
 })

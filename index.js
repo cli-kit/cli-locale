@@ -31,7 +31,7 @@ function sanitize(lang, filter) {
  *  @return A language identifier.
  */
 function find(search, filter) {
-  var lang = language, search = search || [], i, k, v, re = /^LC_/;
+  var lang, search = search || [], i, k, v, re = /^LC_/;
   for(i = 0;i < search.length;i++) {
     lang = sanitize(process.env[process.env[search[i]]] || '', filter);
     if(lang) return lang;
@@ -41,8 +41,10 @@ function find(search, filter) {
     v = process.env[k];
     if(re.test(k) && v) {
       lang = sanitize(v, filter);
+      if(lang) return lang;
     }
   }
+  lang = sanitize(process.env.LANG);
   return lang || language;
 }
 
