@@ -58,4 +58,25 @@ describe('cli-locale:', function() {
     expect(lang).to.be.a('string').that.equals('en_us');
     done();
   });
+  it('should return default language when LC_ALL=C', function(done) {
+    clear();
+    process.env.LC_ALL = 'C';
+    var lang = find(search);
+    expect(lang).to.be.a('string').that.equals(lc.language);
+    done();
+  });
+  it('should return default language when LC_TIME=C', function(done) {
+    clear();
+    process.env.LC_TIME = 'C';
+    var lang = find(search);
+    expect(lang).to.be.a('string').that.equals(lc.language);
+    done();
+  });
+  it('should return default language when LANG=C', function(done) {
+    clear();
+    process.env.LANG = 'C';
+    var lang = find(search);
+    expect(lang).to.be.a('string').that.equals(lc.language);
+    done();
+  });
 })

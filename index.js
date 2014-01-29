@@ -19,6 +19,16 @@ function sanitize(lang, filter) {
 }
 
 /**
+ *  Compares whether the language string equals the
+ *  string *c* and returns the default if it does.
+ *
+ *  @param lang The language candidate.
+ */
+function c(lang) {
+  return lang == 'c' ? language : lang;
+}
+
+/**
  *  Find the value of an LC environment variable and return a
  *  sanitized represention of the locale.
  *
@@ -34,18 +44,18 @@ function find(search, filter) {
   var lang, search = search || [], i, k, v, re = /^LC_/;
   for(i = 0;i < search.length;i++) {
     lang = sanitize(process.env[process.env[search[i]]] || '', filter);
-    if(lang) return lang;
+    if(lang) return c(lang);
   }
   // nothing found in search array, find first available
   for(k in process.env) {
     v = process.env[k];
     if(re.test(k) && v) {
       lang = sanitize(v, filter);
-      if(lang) return lang;
+      if(lang) return c(lang);
     }
   }
-  lang = sanitize(process.env.LANG);
-  return lang || language;
+  lang = c(sanitize(process.env.LANG));
+  return c(lang) || language;
 }
 
 module.exports = function(lang) {
