@@ -10,8 +10,7 @@ var language = 'en';
  *  @return A sanitized language identifier.
  */
 function sanitize(lang, filter) {
-  if(!lang) return lang;
-  lang = '' + lang;
+  if(!(typeof lang == 'string')) return lang;
   lang = lang.replace(/\..*$/, '').toLowerCase();
   if(typeof filter == 'function') {
     lang = filter(lang);

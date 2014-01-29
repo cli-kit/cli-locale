@@ -1,6 +1,6 @@
 {
   "name": "cli-locale",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Utilities for working with LC environment variables",
   "author": "muji <noop@xpm.io>",
   "repository": {
@@ -20,5 +20,13 @@
     "lc",
     "locale"
   ],
-  "scripts": {}
+  "devDependencies": {
+    "mocha": ">= 1.17.0",
+    "chai": ">= 1.8.1"
+  },
+  "engine": [ "node >= 0.10.21" ],
+  "scripts": {
+    "test": "mocha -u bdd --recursive --reporter list -A test/unit/"
+  },
+  "config" : {}
 }

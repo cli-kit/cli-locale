@@ -8,6 +8,12 @@ Utilities for working with LC environment variables.
 npm install cli-locale
 ```
 
+## Test
+
+```
+npm test
+```
+
 ## API
 
 ```
