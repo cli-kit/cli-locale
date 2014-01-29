@@ -54,7 +54,7 @@ function find(search, filter) {
       if(lang) return c(lang);
     }
   }
-  lang = c(sanitize(process.env.LANG));
+  lang = c(sanitize(process.env.LANG, filter));
   return c(lang) || language;
 }
 
