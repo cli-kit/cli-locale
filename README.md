@@ -41,6 +41,16 @@ Find the value of an LC environment variable and return a sanitized represention
 
 Return a language identifier.
 
+The rules for locating a language identifier are:
+
+* If a variable defined in the search array exists, use it.
+* If the value is C return the default `language`.
+* Attempt to find the first variable that begins with LC.
+* If the value is C return the default `language`.
+* If no language is found use `LANG`, if the value of `LANG` is C return the
+  default language.
+* If all the above tests fail return the default language.
+
 ## language
 
 A language identifier to use when no value could be extracted via the environment, default value is `en`.
