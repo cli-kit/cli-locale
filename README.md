@@ -16,14 +16,14 @@ npm test
 
 ## API
 
-```
+```javascript
 var lc = require('cli-locale')('en_us');
 var lang = lc.find(['LC_ALL', 'LC_MESSAGES']);
 ```
 
 Suppose you load files based on the language identifier and prefer using hyphens to underscores, you can pass a filter function:
 
-```
+```javascript
 var lc = require('cli-locale')('en_us');
 var lang = lc.find(['LC_ALL', 'LC_MESSAGES'], function(lang) {
   return lang.replace(/_/g, '-');
