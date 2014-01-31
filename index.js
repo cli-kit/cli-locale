@@ -43,7 +43,7 @@ function c(lang) {
 function find(search, filter) {
   var lang, search = search || [], i, k, v, re = /^LC_/;
   for(i = 0;i < search.length;i++) {
-    lang = sanitize(process.env[process.env[search[i]]] || '', filter);
+    lang = sanitize(process.env[search[i]] || '', filter);
     if(lang) return c(lang);
   }
   // nothing found in search array, find first available
@@ -51,10 +51,10 @@ function find(search, filter) {
     v = process.env[k];
     if(re.test(k) && v) {
       lang = sanitize(v, filter);
-      if(lang) return c(lang);
+      if(lang) break;
     }
   }
-  lang = c(sanitize(process.env.LANG, filter));
+  if(!lang) lang = c(sanitize(process.env.LANG, filter));
   return c(lang) || language;
 }
 
