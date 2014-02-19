@@ -93,4 +93,19 @@ describe('cli-locale:', function() {
     expect(lang).to.be.a('string').that.equals(lc.language);
     done();
   });
+  it('should return null when strict', function(done) {
+    clear();
+    process.env = {};
+    var lang = find(search, null, true);
+    expect(lang).to.eql(null);
+    done();
+  });
+  it('should return null with invalid filter function', function(done) {
+    clear();
+    process.env = {};
+    process.env.LANG = enus;
+    var lang = find(search, function(){return null;}, true);
+    expect(lang).to.eql(null);
+    done();
+  });
 })

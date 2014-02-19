@@ -37,11 +37,13 @@ function c(lang) {
  *
  *  @param search An array of LC variables to prefer.
  *  @param filter A filter function.
+ *  @param strict A boolean indicating that the default language
+ *  should never be returned.
  *
  *  @return A language identifier.
  */
-function find(search, filter) {
-  var lang, search = search || [], i, k, v, re = /^LC_/;
+function find(search, filter, strict) {
+  var lang, search = search || [], i, k, v, re = /^(LC_|LANG)/;
   for(i = 0;i < search.length;i++) {
     lang = sanitize(process.env[search[i]] || '', filter);
     if(lang) return c(lang);
@@ -55,7 +57,7 @@ function find(search, filter) {
     }
   }
   if(!lang) lang = c(sanitize(process.env.LANG, filter));
-  return c(lang) || language;
+  return c(lang) || (!strict ? language : null);
 }
 
 module.exports = function(lang) {

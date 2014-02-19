@@ -55,12 +55,13 @@ The rules for locating a language identifier are:
 
 A language identifier to use when no value could be extracted via the environment, default value is `en`.
 
-### sanitize(lang, [filter])
+### sanitize(lang, [filter], [strict])
 
 Sanitize the value of an LC variable removing any character encoding portion, such that `en_GB.UTF-8` becomes `en_gb`.
 
 * `lang`: A language identifier extracted from an LC environment variable.
 * `filter`: A filter function.
+* `strict`: Return null rather than the default language `en` when no language could be extracted from the environment.
 
 Returns a sanitized language identifier.
 
